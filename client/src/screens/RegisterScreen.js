@@ -2,9 +2,12 @@ import { useMutation, gql } from '@apollo/client'
 import { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 
+import { useForm } from '../utils/hooks'
+
 export default function RegisterScreen(props) {
   const [errors, setErrors] = useState({})
-  const [values, setValues] = useState({
+
+  const { onChange, onSubmit, values } = useForm(registerUser, {
     username: '',
     email: '',
     password: '',
@@ -12,29 +15,22 @@ export default function RegisterScreen(props) {
   })
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, result) {
-      console.log(result)
+    update() {
       props.history.push('/')
     },
     onError(err) {
-      console.log(err.graphQLErrors[0].extensions.exception.errors)
       setErrors(err.graphQLErrors[0].extensions.exception.errors)
     },
     variables: values,
   })
 
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
-
-  const onSubmit = (e) => {
-    e.preventDefault()
+  function registerUser() {
     addUser()
   }
 
   return (
     <div className='form-container'>
-      <Form onSubmit={onSubmit} noValidate className={loading && 'loading'}>
+      <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Register</h1>
         <Form.Input
           label='Username'

@@ -11,6 +11,7 @@ import MenuBar from './component/MenuBar'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import SinglePost from './screens/SinglePostScreen'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/' component={HomeScreen} />
           <AuthRoute exact path='/register' component={RegisterScreen} />
           <AuthRoute exact path='/login' component={LoginScreen} />
+          <Route exact path='/post/:postId' component={SinglePost} />
         </Container>
       </Router>
     </AuthProvider>

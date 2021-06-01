@@ -6,6 +6,7 @@ const resolvers = require('./graphql/resolvers')
 const connectDB = require('./config/db')
 
 dotenv.config()
+const PORT = process.env.PORT || 5000
 
 const pubsub = new PubSub()
 
@@ -17,6 +18,6 @@ const server = new ApolloServer({
 
 connectDB()
 
-server.listen({ port: 5000 }).then((res) => {
+server.listen({ port: PORT }).then((res) => {
   console.log(`Server running at ${res.url}`)
 })

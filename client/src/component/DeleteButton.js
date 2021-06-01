@@ -10,7 +10,6 @@ export default function DeleteButton({ postId, callback }) {
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     update(proxy) {
       setConfirmOpen(false)
-      //todo: remove post from cache
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
       })

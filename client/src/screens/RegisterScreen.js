@@ -1,11 +1,13 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { Form, Button, Container } from 'semantic-ui-react'
 
 import { AuthContext } from '../context/auth'
 import { useForm } from '../utils/hooks'
+import { HeaderContext } from '../context/header'
 
 export default function RegisterScreen(props) {
+  const { activateHeaderItem } = useContext(HeaderContext)
   const context = useContext(AuthContext)
   const [errors, setErrors] = useState({})
 
@@ -30,6 +32,10 @@ export default function RegisterScreen(props) {
   function registerUser() {
     addUser()
   }
+
+  useEffect(() => {
+    activateHeaderItem('register')
+  }, [])
 
   return (
     <Container>

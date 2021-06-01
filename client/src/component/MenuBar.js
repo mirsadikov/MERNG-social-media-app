@@ -3,15 +3,18 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../context/auth'
+import { HeaderContext } from '../context/header'
 
 export default function MenuBar() {
   const { user, logout } = useContext(AuthContext)
+  const { activeItem, activateHeaderItem } = useContext(HeaderContext)
 
-  const pathname = window.location.pathname
-  const path = pathname === '/' ? 'home' : pathname.substr(1)
+  // const pathname = window.location.pathname
+  // const path = pathname === '/' ? 'home' : pathname.substr(1)
 
-  const [activeItem, setActiveItem] = useState(path)
-  const handleItemClick = (e, { name }) => setActiveItem(name)
+  // const [activeItem, setActiveItem] = useState(path)
+  // const handleItemClick = (e, { name }) => setActiveItem(name)
+  const handleItemClick = (e, { name }) => activateHeaderItem(name)
 
   return user ? (
     <Menu

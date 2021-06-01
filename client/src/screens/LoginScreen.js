@@ -1,12 +1,15 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { Form, Button, Container } from 'semantic-ui-react'
 
 import { AuthContext } from '../context/auth'
 import { useForm } from '../utils/hooks'
+import { HeaderContext } from '../context/header'
 
 export default function LoginScreen(props) {
   const context = useContext(AuthContext)
+  const { activateHeaderItem } = useContext(HeaderContext)
+
   const [errors, setErrors] = useState({})
 
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
@@ -28,6 +31,10 @@ export default function LoginScreen(props) {
   function loginUserCallback() {
     loginUser()
   }
+
+  useEffect(() => {
+    activateHeaderItem('login')
+  }, [])
 
   return (
     <Container>

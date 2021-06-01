@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Icon, Label, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 import MyPopup from './MyPopup'
+import { HeaderContext } from '../context/header'
 
 export default function LikeButton({ post: { id, likeCount, likes }, user }) {
   const [liked, setLiked] = useState(false)
+  const { activateHeaderItem } = useContext(HeaderContext)
 
   useEffect(() => {
     if (user && likes.find((like) => like.username === user.username)) {
@@ -33,7 +35,13 @@ export default function LikeButton({ post: { id, likeCount, likes }, user }) {
             </Button>
           )
         ) : (
-          <Button as={Link} to='/login' color='teal' basic>
+          <Button
+            as={Link}
+            to='/login'
+            onClick={() => activateHeaderItem('login')}
+            color='teal'
+            basic
+          >
             <Icon name='heart' />
           </Button>
         )}

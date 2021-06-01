@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import './App.css'
 
 import { AuthProvider } from './context/auth'
+import { HeaderProvider } from './context/header'
 import AuthRoute from './utils/authRoute'
 
 import MenuBar from './component/MenuBar'
@@ -16,15 +17,17 @@ import SinglePost from './screens/SinglePostScreen'
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Container>
-          <MenuBar />
-          <Route exact path='/' component={HomeScreen} />
-          <AuthRoute exact path='/register' component={RegisterScreen} />
-          <AuthRoute exact path='/login' component={LoginScreen} />
-          <Route exact path='/post/:postId' component={SinglePost} />
-        </Container>
-      </Router>
+      <HeaderProvider>
+        <Router>
+          <Container>
+            <MenuBar />
+            <Route exact path='/' component={HomeScreen} />
+            <AuthRoute exact path='/register' component={RegisterScreen} />
+            <AuthRoute exact path='/login' component={LoginScreen} />
+            <Route exact path='/post/:postId' component={SinglePost} />
+          </Container>
+        </Router>
+      </HeaderProvider>
     </AuthProvider>
   )
 }

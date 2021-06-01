@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Icon, Button, Confir } from 'semantic-ui-react'
+import { Icon, Button, Confirm } from 'semantic-ui-react'
 import { gql, useMutation } from '@apollo/client'
 
 import { FETCH_POSTS_QUERY } from '../utils/graphql'

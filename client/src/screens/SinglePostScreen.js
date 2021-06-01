@@ -6,6 +6,7 @@ import { Grid, Image, Button, Icon, Label, Card, Form } from 'semantic-ui-react'
 import { AuthContext } from '../context/auth'
 import LikeButton from '../component/LikeButton'
 import DeleteButton from '../component/DeleteButton'
+import MyPopup from '../component/MyPopup'
 
 export default function SinglePostScreen(props) {
   const postId = props.match.params.postId
@@ -71,18 +72,20 @@ export default function SinglePostScreen(props) {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as='div'
-                  labelPosition='right'
-                  onClick={() => console.log('comment on post')}
-                >
-                  <Button basic color='blue'>
-                    <Icon name='comments' />
+                <MyPopup content='Comment on post'>
+                  <Button
+                    as='div'
+                    labelPosition='right'
+                    onClick={() => commentInputRef.current.focus()}
+                  >
+                    <Button basic color='blue'>
+                      <Icon name='comments' />
+                    </Button>
+                    <Label basic color='blue' pointing='left'>
+                      {commentCount}
+                    </Label>
                   </Button>
-                  <Label basic color='blue' pointing='left'>
-                    {commentCount}
-                  </Label>
-                </Button>
+                </MyPopup>
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallback} />
                 )}

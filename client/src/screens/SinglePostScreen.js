@@ -7,6 +7,7 @@ import { AuthContext } from '../context/auth'
 import LikeButton from '../component/LikeButton'
 import DeleteButton from '../component/DeleteButton'
 import MyPopup from '../component/MyPopup'
+import Avatar from '../assets/avatar.png'
 
 export default function SinglePostScreen(props) {
   const postId = props.match.params.postId
@@ -53,14 +54,10 @@ export default function SinglePostScreen(props) {
     } = data.getPost
 
     postMarkup = (
-      <Grid>
+      <Grid container stackable>
         <Grid.Row>
           <Grid.Column width={2}>
-            <Image
-              floated='right'
-              size='small'
-              src='https://react.semantic-ui.com/images/avatar/large/molly.png'
-            />
+            <Image centered size='small' src={Avatar} />
           </Grid.Column>
           <Grid.Column width={10}>
             <Card fluid>

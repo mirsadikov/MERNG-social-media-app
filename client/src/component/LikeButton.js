@@ -19,7 +19,7 @@ export default function LikeButton({ post: { id, likeCount, likes }, user }) {
   })
 
   return (
-    <Button as='div' labelPosition='right' onClick={likePost}>
+    <Button as='div' labelPosition='right' onClick={user && likePost}>
       {user ? (
         liked ? (
           <Button color='teal'>
